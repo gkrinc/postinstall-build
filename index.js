@@ -20,6 +20,8 @@ if (POSTINSTALL_BUILD_CWD !== CWD) {
   fs.stat(BUILD_ARTIFACT, function(err, stats) {
     if (err || !(stats.isFile() || stats.isDirectory())) {
       var opts = { env: process.env };
+      if(process.argv[4])
+        opts.maxBuffer = process.argv[4];
       // This script will run again after we run `npm install` below. Set an
       // environment variable to tell it to skip the check. Really we just want
       // the execSync's `env` to be modified, but it's easier just modify and

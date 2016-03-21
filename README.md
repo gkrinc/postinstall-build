@@ -15,7 +15,7 @@ npm install postinstall-build --save
 ## Usage
 
 ```shell
-postinstall-build <PATH_TO_BUILD_ARTIFACT> <BUILD_COMMAND>
+postinstall-build <PATH_TO_BUILD_ARTIFACT> <BUILD_COMMAND> <MAX_BUFFER>
 ```
 
 ## Explanation
@@ -35,6 +35,10 @@ in other words, they'd need to be production `dependencies` instead of
 real dependencies, they're only used in the build step). That means even
 everyone installing from NPM wastes time installing them, even though they
 already have the build artifacts!
+
+If your project has a lot of dependencies you may run into a maxBuffer error.
+The default for node child processes is 200KB (https://nodejs.org/api/child_process.html#child_process_child_process_exec_command_options_callback). The MAX_BUFFER argument will be passed
+to child_process.exec.
 
 This helper fixes that. Just tell it where a build artifact is and what your
 build step is, and it'll do the rest. Used as intended, `postinstall-build`
